@@ -1,0 +1,33 @@
+.recent-entries {
+  color: #bebfc7;
+  padding: 15px 20px;
+  background-color: hsl(0, 0%, 15%, 0.75);
+  border-radius: 5px;
+}
+
+.entries p {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #888888;
+}
+
+.entries div {
+  display: flex;
+  align-items: center;
+}
+
+.entries {
+  margin-top: 5px;
+}
+
+.you-owe {
+  color: #bebfc7;
+}
+
+.you-are-owed {
+  color: #afe804;
+}
+
+.icon {
+  transform: translateY(2.5px);
+}

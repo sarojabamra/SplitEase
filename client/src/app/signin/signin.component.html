@@ -1,0 +1,47 @@
+<div class="signin-page">
+  <div class="signin-container">
+    <div class="box">
+      <form (ngSubmit)="onSignin()" class="form-container">
+        <div class="auth-toggle">
+          <h3 routerLink="/signup">Sign Up</h3>
+          <h3 class="active">Sign In</h3>
+        </div>
+        <p class="intro">
+          Welcome! Please sign in to access your account. If you don't have an
+          account yet, feel free to sign up.
+        </p>
+        <div class="input-container">
+          <mat-icon class="icon">face</mat-icon>
+          <input
+            type="text"
+            placeholder="Enter your Username"
+            name="username"
+            [(ngModel)]="signinForm.username"
+            required
+          />
+        </div>
+
+        <div class="input-container">
+          <mat-icon class="icon">lock</mat-icon>
+          <input
+            type="password"
+            placeholder="Enter your Password"
+            name="password"
+            [(ngModel)]="signinForm.password"
+            required
+          />
+        </div>
+
+        <button type="submit">Sign In</button>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </form>
+      <div class="center">
+        <p class="forgot-password">
+          Forgot Password?
+          <span routerLink="/forgotPassword">Click here</span> to reset your
+          password.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

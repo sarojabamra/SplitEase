@@ -1,0 +1,16 @@
+<div class="recent-entries">
+  <h3>Recent Entries</h3>
+  <div class="entries">
+    <div *ngFor="let entry of recentEntries">
+      <mat-icon class="icon">arrow_right</mat-icon>
+      <p *ngIf="entry.type === 'youOwe'">
+        You owe <span class="you-owe"> ₹{{ entry.amount }} </span> to
+        {{ entry.user }}
+      </p>
+      <p *ngIf="entry.type === 'owedToYou'">
+        {{ entry.user }} owes you
+        <span class="you-are-owed"> ₹{{ entry.amount }} </span>
+      </p>
+    </div>
+  </div>
+</div>

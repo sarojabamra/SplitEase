@@ -1,0 +1,77 @@
+<div class="dashboard-container">
+  <div class="container">
+    <div class="header">
+      <div>
+        <h3>{{ loggedUser.name }}</h3>
+        <p class="dashboard">Your Dashboard</p>
+      </div>
+      <div class="buttons">
+        <div>
+          <button class="add-expense" (click)="openModal()">Add expense</button>
+        </div>
+        <div>
+          <button class="settle-debt">Settle debt</button>
+        </div>
+      </div>
+    </div>
+    <div class="summary">
+      <div>
+        <p>Your total Balance:</p>
+        <p
+          [ngClass]="{
+            'positive-balance balance': loggedUser.balance.totalBalance >= 0,
+            'negative-balance balance': loggedUser.balance.totalBalance < 0
+          }"
+        >
+          {{ getFormattedBalance().sign }} ₹{{
+            getFormattedBalance().absBalance
+          }}
+        </p>
+      </div>
+      <div class="vr"></div>
+      <div>
+        <p>You owe:</p>
+        <p class="balance you-owe">₹{{ totalYouOwe }}</p>
+      </div>
+      <div class="vr"></div>
+      <div>
+        <p>You are owed:</p>
+        <p class="balance">₹{{ totalOwedToYou }}</p>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="you-owe">
+        <h3>YOU OWE</h3>
+        <div *ngFor="let user of usersYouOwe" class="user-item">
+          <div class="imgdiv">
+            <img src="images/profile-image.jpg" />
+          </div>
+          <div>
+            <p class="username">{{ user.user.name }}</p>
+            <p class="owe">
+              you owe:
+              <span class="balance you-owe span">₹{{ user.amount }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="you-are-owed">
+        <h3>YOU ARE OWED</h3>
+        <div *ngFor="let user of usersWhoOweYou" class="user-item">
+          <div class="imgdiv">
+            <img src="images/profile-image.jpg" />
+          </div>
+          <div>
+            <p class="username">{{ user.user.name }}</p>
+            <p class="owe">
+              owes you:
+              <span class="balance">₹{{ user.amount }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-expense-modal></app-expense-modal>

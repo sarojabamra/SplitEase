@@ -1,0 +1,37 @@
+<div *ngIf="isUserSearching">
+  <div class="button-div">
+    <button class="back-btn" (click)="stopSearching()">
+      <mat-icon class="icon">keyboard_arrow_left</mat-icon>
+      Back to Recents
+    </button>
+  </div>
+  <div class="hr"></div>
+  <div *ngIf="users.length > 0" class="user-list">
+    <div>
+      <div *ngFor="let user of users" (click)="openUserModal(user)">
+        <div class="user">
+          <div class="user-item">
+            <div class="user-item-col-1">
+              <div class="imgdiv">
+                <img src="images/profile-image.jpg" />
+              </div>
+              <div>
+                <p class="name">{{ user.name }}</p>
+                <p class="email">{{ user.email }}</p>
+              </div>
+            </div>
+            <div>
+              <mat-icon class="add-icon">add_box</mat-icon>
+            </div>
+          </div>
+          <div class="hr"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-list no-data" *ngIf="users.length === 0">
+    No users found.
+  </div>
+</div>
+
+<app-user-modal *ngIf="selectedUser" [userData]="selectedUser"></app-user-modal>

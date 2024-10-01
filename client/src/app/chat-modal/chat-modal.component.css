@@ -1,0 +1,132 @@
+.chat-modal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 400px;
+  height: 450px;
+  background-color: #252525;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 900;
+}
+
+.chat-modal-content {
+  padding: 16px;
+}
+
+.imgdiv {
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgdiv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid hsl(0, 0%, 45%, 0.25);
+  padding-bottom: 15px;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: 16px;
+  color: #bebfc7;
+}
+
+.email {
+  font-size: 13px;
+  color: #888888;
+}
+
+.message-input {
+  margin-top: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: #bebfc7;
+}
+
+.close-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #bebfc7;
+}
+
+.message-sender {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sender-container {
+  background-color: #3c3c3c;
+  color: #bebfc7;
+  padding: 8px 15px;
+  margin-top: 5px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.messages {
+  overflow-y: scroll;
+  height: 310px;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
+}
+
+.input-container {
+  width: 100%;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #323232;
+  gap: 5px;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+input {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  padding: 0px 5px;
+  border: none;
+  color: #bebfc7;
+}
+
+button {
+  transform: scale(80%);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 4px;
+}
+
+.icon {
+  transform: translateY(2px);
+  color: #888888;
+}
+
+.attach-icon {
+  scale: 90%;
+  color: #888888;
+}

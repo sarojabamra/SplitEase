@@ -1,0 +1,50 @@
+<div *ngIf="isOpen" class="modal-overlay" (click)="closeModal()"></div>
+<div *ngIf="isOpen" class="modal">
+  <div class="modal-header">
+    <h2>Split Expense</h2>
+    <button (click)="closeModal()">Close</button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <label>
+        Description:
+        <div class="input-container">
+          <input [(ngModel)]="modalData.description" name="description" />
+        </div>
+      </label>
+      <label>
+        Amount:
+        <div class="input-container">
+          <input type="number" [(ngModel)]="modalData.amount" name="amount" />
+        </div>
+      </label>
+      <label>
+        Paid By:
+        <div class="input-container">
+          <input [(ngModel)]="modalData.paidBy" name="paidBy" />
+        </div>
+      </label>
+      <div *ngFor="let split of modalData.splitWith; let i = index">
+        <label>
+          Split With User:
+          <div class="input-container">
+            <input [(ngModel)]="split.user" name="user{{ i }}" />
+          </div>
+        </label>
+        <label>
+          Amount:
+          <div class="input-container">
+            <input
+              type="number"
+              [(ngModel)]="split.amount"
+              name="amount{{ i }}"
+            />
+          </div>
+        </label>
+        <button type="button" (click)="removeSplit(i)">Remove</button>
+      </div>
+      <button type="button" (click)="addSplit()">Add Split</button>
+      <button type="button" (click)="submit()">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="signup-page">
+  <div class="signup-container">
+    <div class="box">
+      <form (ngSubmit)="onSignup()" class="form-container">
+        <div class="auth-toggle">
+          <h3 class="active">Sign Up</h3>
+          <h3 routerLink="/signin">Sign In</h3>
+        </div>
+        <p class="intro">
+          Create an account to access this service. It's quick and easy. Enter
+          your credentials to get started.
+        </p>
+        <div class="input-container">
+          <mat-icon class="icon">face</mat-icon>
+          <input
+            type="text"
+            placeholder="Choose your Username"
+            name="username"
+            [(ngModel)]="signupForm.username"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <mat-icon class="icon">account_box</mat-icon>
+          <input
+            type="text"
+            placeholder="Enter your Name"
+            name="name"
+            [(ngModel)]="signupForm.name"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <mat-icon class="icon">alternate_email</mat-icon>
+          <input
+            type="email"
+            placeholder="Enter your Email"
+            name="email"
+            [(ngModel)]="signupForm.email"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <mat-icon class="icon">call</mat-icon>
+          <input
+            type="text"
+            placeholder="Enter your Mobile Number"
+            name="mobileNumber"
+            [(ngModel)]="signupForm.mobileNumber"
+            required
+          />
+        </div>
+        <div class="input-container">
+          <mat-icon class="icon">lock</mat-icon>
+          <input
+            type="password"
+            placeholder="Choose your Password"
+            name="password"
+            [(ngModel)]="signupForm.password"
+            required
+          />
+        </div>
+
+        <button type="submit">Sign Up</button>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,191 @@
+.dashboard-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  background-color: hsl(0, 0%, 15%, 0.5);
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+  font-weight: 400;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  background-color: hsl(0, 0%, 20%, 0.5);
+  display: flex;
+  padding: 15px 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 5px 5px 0 0;
+  align-items: center;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 18px;
+  transform: translateY(4px);
+}
+
+.settle-debt {
+  padding: 10px 50px;
+  background-color: #afe804;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #171717;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 2px;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.add-expense {
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: #3c3c3c;
+  outline: none;
+  color: #bebfc7;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 2px;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.summary {
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  background-color: hsl(0, 0%, 20%, 0.75);
+  border-top: 1px solid hsl(0, 0%, 45%, 0.25);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+p {
+  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.vr {
+  border-right: 1px solid hsl(0, 0%, 45%, 0.25);
+}
+
+.balance {
+  padding: 2px;
+  color: #afe804;
+  font-size: 12px;
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
+.balance.you-owe {
+  padding: 2px;
+  color: #888888 !important;
+  font-size: 12px;
+
+  border-radius: 20px;
+  margin-top: 5px;
+}
+
+.dashboard {
+  padding: 2px;
+  color: #888888 !important;
+  font-size: 13px;
+  margin-top: -1px;
+}
+
+.breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 15px 20px;
+  gap: 5px;
+}
+
+.breakdown h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #bebfc7;
+  font-weight: 600;
+}
+
+.username {
+  font-size: 14px;
+}
+
+.owe {
+  padding: 2px;
+  color: #888888 !important;
+  font-size: 12px;
+}
+
+.user-item {
+  background-color: hsl(0, 0%, 20%, 0.5);
+  padding: 15px;
+  gap: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  align-items: center;
+  display: flex;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.user-item:hover {
+  background-color: hsl(0, 0%, 20%, 0.75);
+}
+
+.balance.you-owe.span {
+  color: #bebfc7 !important;
+}
+
+.imgdiv {
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgdiv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.you-are-owed h3 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.positive-balance {
+  color: #afe804;
+}
+
+.negative-balance {
+  color: #888888;
+}

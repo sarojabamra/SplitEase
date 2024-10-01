@@ -1,0 +1,40 @@
+<div class="chat-modal" *ngIf="modalService.chatModalState$ | async">
+  <div class="chat-modal-content">
+    <div class="header">
+      <div class="user-info">
+        <div class="imgdiv">
+          <img src="images/profile-image.jpg" />
+        </div>
+        <div>
+          <p class="name">{{ chatData.users[1].name }}</p>
+          <p class="email">{{ chatData.users[1].username }}</p>
+        </div>
+      </div>
+      <div class="close-btn">
+        <mat-icon (click)="closeChatModal()" class="close-icon">close</mat-icon>
+      </div>
+    </div>
+    <div class="chat-content">
+      <div class="messages">
+        <div *ngFor="let message of chatMessages">
+          <div class="message-sender">
+            <p class="sender-container">{{ message.content }}</p>
+          </div>
+        </div>
+      </div>
+
+      <form (ngSubmit)="onSendMessage()" class="message-input">
+        <div class="input-container">
+          <mat-icon class="attach-icon"> attach_file</mat-icon>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            name="content"
+            [(ngModel)]="messageForm.content"
+          />
+          <button type="submit"><mat-icon class="icon">send</mat-icon></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

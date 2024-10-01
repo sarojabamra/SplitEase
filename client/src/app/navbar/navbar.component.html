@@ -1,0 +1,25 @@
+<div class="navbar">
+  <div class="col-1">
+    <div class="imgdiv2">
+      <img src="images/Logo.png" />
+    </div>
+    <div class="input-container">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input
+        (click)="isSearching()"
+        placeholder="Search for users..."
+        [formControl]="searchControl"
+      />
+    </div>
+    <p class="nav active">Dashboard<mat-icon>keyboard_arrow_down</mat-icon></p>
+    <p class="nav">Groups<mat-icon>keyboard_arrow_down</mat-icon></p>
+  </div>
+  <div class="col-2">
+    <div class="imgdiv">
+      <img src="images/profile-image.jpg" />
+    </div>
+    <p class="nav">Saroja Bamra<mat-icon>keyboard_arrow_down</mat-icon></p>
+    <button class="settings-btn">Profile</button>
+    <button (click)="handleLogout()" class="logout-btn">Logout</button>
+  </div>
+</div>
