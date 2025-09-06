@@ -6,48 +6,219 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  backdrop-filter: blur(2px);
 }
 
 .modal {
   position: fixed;
-  width: 450px;
+  width: 500px;
+  max-width: 90vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #252525;
-  padding: 55px;
-  color: #bebfc7;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 30px;
+  color: #2c2c3e;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   z-index: 1001;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c2c3e;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-header button:hover {
+  background-color: #f5f5f5;
+  color: #2c2c3e;
 }
 
 .modal-body {
   margin-top: 10px;
 }
 
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-body label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 500;
+  color: #2c2c3e;
+  font-size: 14px;
+}
+
 .input-container {
   width: 100%;
-  padding: 10px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #3c3c3c;
-  gap: 5px;
+  background-color: #f8f9fa;
+  gap: 8px;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.input-container:focus-within {
+  border-color: #05cd99;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(5, 205, 153, 0.1);
 }
 
 input {
   width: 100%;
   background-color: transparent;
   outline: none;
-  padding: 0px 5px;
+  padding: 0;
   border: none;
-  color: #bebfc7;
+  color: #2c2c3e;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input::placeholder {
+  color: #a3aed0;
+}
+
+.split-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.split-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2c3e;
+}
+
+.split-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.split-item:last-child {
+  margin-bottom: 0;
+}
+
+.remove-split-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.remove-split-btn:hover {
+  background: #e63939;
+  transform: scale(1.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.add-split-btn {
+  background-color: #05cd99;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.add-split-btn:hover {
+  background-color: #04b388;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 205, 153, 0.3);
+}
+
+.submit-btn {
+  background-color: #e31a1a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #c41818;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 26, 26, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal {
+    width: 95vw;
+    padding: 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
 }

@@ -2,7 +2,7 @@
   <div class="button-div">
     <button class="back-btn" (click)="stopSearching()">
       <mat-icon class="icon">keyboard_arrow_left</mat-icon>
-      Back to Recents
+      <p>Back to Recents</p>
     </button>
   </div>
   <div class="hr"></div>
@@ -13,7 +13,11 @@
           <div class="user-item">
             <div class="user-item-col-1">
               <div class="imgdiv">
-                <img src="images/profile-image.jpg" />
+                <app-avatar
+                  *ngIf="user"
+                  [user]="user"
+                  size="medium"
+                ></app-avatar>
               </div>
               <div>
                 <p class="name">{{ user.name }}</p>
@@ -31,6 +35,49 @@
   </div>
   <div class="user-list no-data" *ngIf="users.length === 0">
     No users found.
+  </div>
+</div>
+
+<!-- Recent Chats Section -->
+<div *ngIf="!isUserSearching" class="recent-chats">
+  <h3>Recent Messages</h3>
+  <div *ngIf="recentChats.length > 0" class="chat-list">
+    <div>
+      <div *ngFor="let chat of recentChats" (click)="openChat(chat)">
+        <div class="user">
+          <div class="user-item">
+            <div class="user-item-col-1">
+              <div class="imgdiv">
+                <app-avatar
+                  *ngIf="getOtherUser(chat)"
+                  [user]="getOtherUser(chat)"
+                  size="medium"
+                ></app-avatar>
+              </div>
+              <div>
+                <p class="name">{{ getOtherUser(chat)?.name }}</p>
+                <p class="email" *ngIf="chat.latestMessage">
+                  {{
+                    chat.latestMessage.content.length > 25
+                      ? (chat.latestMessage.content | slice : 0 : 25) + "..."
+                      : chat.latestMessage.content
+                  }}
+                </p>
+              </div>
+            </div>
+            <div>
+              <span class="chat-time" *ngIf="chat.latestMessage">
+                {{ formatTimestamp(chat.latestMessage.createdAt) }}
+              </span>
+            </div>
+          </div>
+          <div class="hr"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-list no-data" *ngIf="recentChats.length === 0">
+    No recent messages.
   </div>
 </div>
 

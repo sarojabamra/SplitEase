@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +25,18 @@ export class UserService {
   users$ = this.usersSubject.asObservable();
   private isUserSearching = new BehaviorSubject<boolean>(false);
   isUserSearching$ = this.isUserSearching.asObservable();
+  private loggedUser: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {
+    // Subscribe to logged user changes
+    this.authService.getLoggedUser().subscribe((user) => {
+      this.loggedUser = user;
+      // Update user list when logged user changes
+      if (this.allUsers.length > 0) {
+        this.updateUserList();
+      }
+    });
+  }
 
   fetchUsers(): void {
     const url = `${this.apiUrl}/getAllUsers`;
@@ -36,8 +47,8 @@ export class UserService {
       )
       .subscribe(
         (users) => {
-          this.allUsers = users; 
-          this.usersSubject.next(users); 
+          this.allUsers = users;
+          this.updateUserList();
         },
         (error) => {
           console.error('Error fetching users:', error);
@@ -47,17 +58,31 @@ export class UserService {
 
   filterUsers(searchTerm: string): void {
     if (!searchTerm.trim()) {
-      this.usersSubject.next(this.allUsers); // If empty search, show all users
+      this.updateUserList();
     } else {
       const filteredUsers = this.allUsers.filter((user) =>
         user.username.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      this.usersSubject.next(filteredUsers); // Update users with filtered results
+      this.updateUserList(filteredUsers);
+    }
+  }
+
+  private updateUserList(userList?: any[]): void {
+    const listToFilter = userList || this.allUsers;
+
+    if (this.loggedUser && this.loggedUser._id) {
+      // Filter out the currently logged-in user
+      const filteredUsers = listToFilter.filter(
+        (user) => user._id !== this.loggedUser._id
+      );
+      this.usersSubject.next(filteredUsers);
+    } else {
+      // If no current user, show all users
+      this.usersSubject.next(listToFilter);
     }
   }
 
   setIsUserSearching(value: boolean) {
     this.isUserSearching.next(value);
-    //console.log(this.isUserSearching);
   }
 }

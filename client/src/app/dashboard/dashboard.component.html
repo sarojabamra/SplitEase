@@ -1,74 +1,175 @@
 <div class="dashboard-container">
   <div class="container">
-    <div class="header">
-      <div>
-        <h3>{{ loggedUser.name }}</h3>
-        <p class="dashboard">Your Dashboard</p>
-      </div>
-      <div class="buttons">
-        <div>
-          <button class="add-expense" (click)="openModal()">Add expense</button>
+    <div class="section-left">
+      <div class="row-1">
+        <div class="card balance-card section-left-1">
+          <div class="total-balance">
+            <div>
+              <p class="sub-text">Your Total Balance</p>
+              <h2
+                [ngClass]="{
+                  positive: loggedUser?.balance?.totalBalance >= 0,
+                  negative: loggedUser?.balance?.totalBalance < 0
+                }"
+              >
+                ₹{{ loggedUser?.balance?.totalBalance || 0 }}
+              </h2>
+            </div>
+            <div>
+              <p class="negative-growth small">-2.45%</p>
+            </div>
+          </div>
+          <p
+            class="balance-status"
+            [ngClass]="{
+              'negative-balance': isInDebt,
+              'positive-balance': !isInDebt
+            }"
+          >
+            <mat-icon>{{
+              isInDebt ? "trending_down" : "trending_up"
+            }}</mat-icon>
+            {{ isInDebt ? "Negative Balance" : "Positive Balance" }}
+          </p>
+
+          <!-- Balance History Chart -->
+          <div class="balance-chart-container">
+            <p-chart
+              type="line"
+              [data]="balanceChartData"
+              [options]="balanceChartOptions"
+            />
+          </div>
         </div>
-        <div>
-          <button class="settle-debt">Settle debt</button>
+        <div class="section-left-row-1-col-2">
+          <div class="card user">
+            <div class="user-info">
+              <div class="profile-pic">
+                <app-avatar
+                  *ngIf="loggedUser"
+                  [user]="loggedUser"
+                  size="large"
+                ></app-avatar>
+              </div>
+              <div>
+                <div class="name-container">
+                  <h3 class="name">{{ loggedUser?.name }}</h3>
+                  <p
+                    class="balance-status"
+                    [ngClass]="{ 'in-debt': isInDebt, positive: !isInDebt }"
+                  >
+                    {{ isInDebt ? "In Debt" : "Positive Balance" }}
+                  </p>
+                </div>
+                <p class="sub-text">Balance Overview</p>
+                <p class="link">
+                  View Profile
+                  <span class="arrow">→</span>
+                </p>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="add-expense" (click)="openModal()">
+                Add Expense
+              </button>
+              <button class="settle-debt">Settle Up</button>
+            </div>
+          </div>
+
+          <!-- Balance Overview -->
+          <div class="balance-overview">
+            <div class="card balance-card owe">
+              <p class="sub-text">You Owe</p>
+              <h2>₹{{ totalYouOwe || 0 }}</h2>
+              <p class="negative balance-change">
+                Total amount you need to pay.
+              </p>
+            </div>
+            <div class="card balance-card owed">
+              <p class="sub-text">You Are Owed</p>
+              <h2>₹{{ totalOwedToYou || 0 }}</h2>
+              <p class="positive balance-change">
+                Total amount others owe you.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="row-2">
+        <div class="card">
+          <h3>Users You Owe</h3>
+          <div class="entries">
+            <div *ngIf="isLoadingUsersYouOwe" class="loading">
+              <p>Loading...</p>
+            </div>
+            <ng-container
+              *ngIf="!isLoadingUsersYouOwe && usersYouOwe.length > 0"
+            >
+              <div *ngFor="let userData of usersYouOwe" class="entry">
+                <app-avatar [user]="userData.user" size="medium"></app-avatar>
+                <div class="entry-details">
+                  <div class="entry-text">{{ userData.user.name }}</div>
+                  <div class="entry-time">
+                    {{ formatTimestamp(userData.timestamp) }}
+                  </div>
+                </div>
+                <div class="amount negative">-₹{{ userData.amount }}</div>
+              </div>
+            </ng-container>
+            <div
+              *ngIf="!isLoadingUsersYouOwe && usersYouOwe.length === 0"
+              class="no-data"
+            >
+              No users you owe.
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Users Who Owe You</h3>
+          <div class="entries">
+            <div *ngIf="isLoadingUsersWhoOweYou" class="loading">
+              <p>Loading...</p>
+            </div>
+            <ng-container
+              *ngIf="!isLoadingUsersWhoOweYou && usersWhoOweYou.length > 0"
+            >
+              <div *ngFor="let userData of usersWhoOweYou" class="entry">
+                <app-avatar [user]="userData.user" size="medium"></app-avatar>
+                <div class="entry-details">
+                  <div class="entry-text">{{ userData.user.name }}</div>
+                  <div class="entry-time">
+                    {{ formatTimestamp(userData.timestamp) }}
+                  </div>
+                </div>
+                <div class="amount positive">+₹{{ userData.amount }}</div>
+              </div>
+            </ng-container>
+            <div
+              *ngIf="!isLoadingUsersWhoOweYou && usersWhoOweYou.length === 0"
+              class="no-data"
+            >
+              No users owe you.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card row-3">
+        <h3>Owe vs Owed History</h3>
+        <div class="owe-owed-chart-container">
+          <p-chart
+            type="line"
+            [data]="oweOwedChartData"
+            [options]="oweOwedChartOptions"
+            class="h-[12rem]"
+          />
+        </div>
+      </div>
+
+      <!-- Transaction & Summary Section -->
     </div>
-    <div class="summary">
-      <div>
-        <p>Your total Balance:</p>
-        <p
-          [ngClass]="{
-            'positive-balance balance': loggedUser.balance.totalBalance >= 0,
-            'negative-balance balance': loggedUser.balance.totalBalance < 0
-          }"
-        >
-          {{ getFormattedBalance().sign }} ₹{{
-            getFormattedBalance().absBalance
-          }}
-        </p>
-      </div>
-      <div class="vr"></div>
-      <div>
-        <p>You owe:</p>
-        <p class="balance you-owe">₹{{ totalYouOwe }}</p>
-      </div>
-      <div class="vr"></div>
-      <div>
-        <p>You are owed:</p>
-        <p class="balance">₹{{ totalOwedToYou }}</p>
-      </div>
-    </div>
-    <div class="breakdown">
-      <div class="you-owe">
-        <h3>YOU OWE</h3>
-        <div *ngFor="let user of usersYouOwe" class="user-item">
-          <div class="imgdiv">
-            <img src="images/profile-image.jpg" />
-          </div>
-          <div>
-            <p class="username">{{ user.user.name }}</p>
-            <p class="owe">
-              you owe:
-              <span class="balance you-owe span">₹{{ user.amount }}</span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="you-are-owed">
-        <h3>YOU ARE OWED</h3>
-        <div *ngFor="let user of usersWhoOweYou" class="user-item">
-          <div class="imgdiv">
-            <img src="images/profile-image.jpg" />
-          </div>
-          <div>
-            <p class="username">{{ user.user.name }}</p>
-            <p class="owe">
-              owes you:
-              <span class="balance">₹{{ user.amount }}</span>
-            </p>
-          </div>
-        </div>
+    <div class="section-right">
+      <div class="card">
+        <app-recent-entries></app-recent-entries>
       </div>
     </div>
   </div>

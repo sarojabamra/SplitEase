@@ -10,8 +10,17 @@ import { UserService } from '../user.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   searchControl = new FormControl('');
+  loggedUser: any;
+
+  // Select options
+  groupOptions = [
+    { label: 'Create Group', value: 'create' },
+    { label: 'All Groups', value: 'all' },
+  ];
+
+  userOptions = [{ label: 'Logout', value: 'logout' }];
 
   constructor(
     private authService: AuthService,
@@ -20,6 +29,10 @@ export class NavbarComponent {
   ) {}
 
   ngOnInit() {
+    this.authService.getLoggedUser().subscribe((user) => {
+      this.loggedUser = user;
+    });
+
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe((value) => {
@@ -42,5 +55,21 @@ export class NavbarComponent {
 
   isSearching() {
     this.userService.setIsUserSearching(true);
+  }
+
+  onGroupSelect(event: any) {
+    if (event.value === 'create') {
+      // Handle create group
+      console.log('Create group selected');
+    } else if (event.value === 'all') {
+      // Handle all groups
+      console.log('All groups selected');
+    }
+  }
+
+  onUserSelect(event: any) {
+    if (event.value === 'logout') {
+      this.handleLogout();
+    }
   }
 }

@@ -57,3 +57,63 @@ export const fetchTransactions = asyncHandler(async (request, response) => {
 
   response.status(200).json(transactions);
 });
+
+// Fetch transactions between two specific users
+export const fetchTransactionsBetweenUsers = asyncHandler(
+  async (request, response) => {
+    const { userId1, userId2 } = request.params;
+
+    console.log(
+      "Fetching transactions between users:",
+      userId1,
+      "and",
+      userId2
+    );
+
+    if (!userId1 || !userId2) {
+      return response
+        .status(400)
+        .json({ message: "Both user IDs are required" });
+    }
+
+    try {
+      const transactions = await Transaction.find({
+        $or: [
+          { from: userId1, to: userId2 },
+          { from: userId2, to: userId1 },
+        ],
+      })
+        .populate("from", "name username")
+        .populate("to", "name username")
+        .populate("expenseId", "description amount")
+        .sort({ createdAt: -1 }); // Most recent first
+
+      console.log("Found transactions:", transactions.length);
+
+      // Format the transactions for the frontend
+      const formattedTransactions = transactions.map((transaction) => {
+        const isFromCurrentUser = transaction.from._id.toString() === userId1;
+
+        return {
+          id: transaction._id,
+          type: transaction.description || "Transaction",
+          amount: isFromCurrentUser ? -transaction.amount : transaction.amount,
+          date: transaction.createdAt,
+          description: transaction.description,
+          expenseId: transaction.expenseId?._id,
+          expenseDescription: transaction.expenseId?.description,
+          expenseAmount: transaction.expenseId?.amount,
+          fromUser: transaction.from,
+          toUser: transaction.to,
+        };
+      });
+
+      response.status(200).json(formattedTransactions);
+    } catch (error) {
+      console.error("Error fetching transactions between users:", error);
+      response
+        .status(500)
+        .json({ message: "Error fetching transactions between users." });
+    }
+  }
+);

@@ -3,11 +3,15 @@
     <div class="header">
       <div class="user-info">
         <div class="imgdiv">
-          <img src="images/profile-image.jpg" />
+          <app-avatar
+            *ngIf="otherUser"
+            [user]="otherUser"
+            size="medium"
+          ></app-avatar>
         </div>
         <div>
-          <p class="name">{{ chatData.users[1].name }}</p>
-          <p class="email">{{ chatData.users[1].username }}</p>
+          <p class="name">{{ otherUser?.name }}</p>
+          <p class="email">{{ otherUser?.username }}</p>
         </div>
       </div>
       <div class="close-btn">
@@ -16,9 +20,20 @@
     </div>
     <div class="chat-content">
       <div class="messages">
-        <div *ngFor="let message of chatMessages">
-          <div class="message-sender">
-            <p class="sender-container">{{ message.content }}</p>
+        <div *ngFor="let message of chatMessages" class="message-wrapper">
+          <div
+            [ngClass]="
+              message.sender._id === otherUser?._id
+                ? 'message-received'
+                : 'message-sent'
+            "
+          >
+            <div class="message-content">
+              <p class="message-text">{{ message.content }}</p>
+              <span class="message-time">{{
+                formatTimestamp(message.timestamp)
+              }}</span>
+            </div>
           </div>
         </div>
       </div>

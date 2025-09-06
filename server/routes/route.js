@@ -29,6 +29,7 @@ import {
 import {
   fetchTransactions,
   recordTransaction,
+  fetchTransactionsBetweenUsers,
 } from "../controllers/transaction-controller.js";
 
 const router = express.Router();
@@ -66,6 +67,16 @@ router.get("/expense/totalOwedToYou/:id", verifyUser, fetchTotalOwedToYou);
 
 //Transactions
 router.post("/transaction/record", verifyUser, recordTransaction);
-router.get("/transaction/fetch", verifyUser, fetchTransactions);
+router.get("/transaction/fetch/:userId", verifyUser, fetchTransactions);
+router.get(
+  "/transaction/between/:userId1/:userId2",
+  verifyUser,
+  fetchTransactionsBetweenUsers
+);
+
+// Test route to verify server is working
+router.get("/test", (req, res) => {
+  res.json({ message: "Server is working!" });
+});
 
 export default router;

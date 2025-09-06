@@ -1,9 +1,9 @@
 .navbar {
   width: 100%;
-  height: 55px;
-
+  height: 70px;
+  background-color: #282a3a;
   display: flex;
-  padding: 0 100px;
+  padding: 0 20px;
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
@@ -13,22 +13,22 @@
 .col-1 {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
 }
 
 .icon {
-  font-size: 18px;
+  font-size: 20px;
   transform: translateY(4.5px);
   margin-right: -5px;
 }
 
 .input-container {
-  padding: 6px 10px;
+  padding: 8px 12px;
   display: flex;
-  width: 290px;
+  width: 350px;
   flex-direction: row;
   align-items: center;
-  background-color: #323232;
+  background-color: #fff;
   gap: 5px;
   margin-right: 10px;
   box-sizing: border-box;
@@ -36,9 +36,9 @@
 }
 
 .search-icon {
-  font-size: 18px;
+  font-size: 20px;
   transform: translateY(4px);
-  color: #fff;
+  color: #777777;
 }
 
 input {
@@ -46,22 +46,25 @@ input {
   background-color: transparent;
   outline: none;
   border: none;
-  color: #bebfc7;
+  color: #777986;
+  font-size: 16px;
 }
 
 .col-2 {
   display: flex;
-  gap: 8px;
+  gap: 15px;
   align-items: center;
 }
 
 input::placeholder {
-  color: #bebfc7;
+  color: #777986;
+  font-size: 16px;
 }
 
 .logout-btn {
-  padding: 10px 50px;
-  background-color: #afe804;
+  padding: 10px 40px;
+  background-color: #f3f4f8;
+  margin-left: 5px;
   outline: none;
   display: flex;
   align-items: center;
@@ -70,39 +73,29 @@ input::placeholder {
   color: #171717;
   border: none;
   cursor: pointer;
-  font-weight: 700;
-  border-radius: 2px;
-  font-size: 14px;
-}
-
-.settings-btn {
-  padding: 10px 50px;
-  background-color: #323232;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  color: #bebfc7;
-  border: none;
-  cursor: pointer;
   font-weight: 600;
   border-radius: 2px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .nav {
-  font-size: 14px;
-  padding: 6px 15px;
-  border-radius: 5px;
-  color: #bebfc7;
+  font-size: 16px;
+  padding: 8px 5px;
+  color: #fff;
   display: flex;
+  font-weight: 500;
   gap: 2px;
   align-items: center;
 }
 
+.notif-icon {
+  color: #fff;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 .nav:hover {
-  background-color: hsl(0, 0%, 20%, 0.5);
   cursor: pointer;
 }
 
@@ -142,5 +135,42 @@ input::placeholder {
 }
 
 .active {
-  background-color: #323232;
+}
+
+/* Navbar Select Styling */
+::ng-deep .navbar-select {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+::ng-deep .navbar-select .p-select-dropdown {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+::ng-deep .navbar-select .p-select-label {
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  padding: 8px 5px !important;
+}
+
+::ng-deep .navbar-select:hover .p-select-label {
+  cursor: pointer !important;
+}
+
+/* Override PrimeNG default styles */
+::ng-deep .navbar-select.p-select {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .navbar-select .p-dropdown-panel {
+  background: #fff !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }

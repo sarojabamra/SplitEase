@@ -1,8 +1,5 @@
 <div class="navbar">
   <div class="col-1">
-    <div class="imgdiv2">
-      <img src="images/Logo.png" />
-    </div>
     <div class="input-container">
       <mat-icon class="search-icon">search</mat-icon>
       <input
@@ -11,15 +8,39 @@
         [formControl]="searchControl"
       />
     </div>
-    <p class="nav active">Dashboard<mat-icon>keyboard_arrow_down</mat-icon></p>
-    <p class="nav">Groups<mat-icon>keyboard_arrow_down</mat-icon></p>
   </div>
   <div class="col-2">
+    <p class="nav" routerLink="/">Home</p>
+    <p class="nav" routerLink="/features">Features</p>
+    <p class="nav active" [routerLink]="['/dashboard']">Dashboard</p>
+
+    <!-- Groups Dropdown -->
+    <p-select
+      [options]="groupOptions"
+      placeholder="Groups"
+      optionLabel="label"
+      optionValue="value"
+      (onChange)="onGroupSelect($event)"
+      styleClass="navbar-select"
+    ></p-select>
+
+    <mat-icon class="notif-icon">notifications</mat-icon>
     <div class="imgdiv">
-      <img src="images/profile-image.jpg" />
+      <app-avatar
+        *ngIf="loggedUser"
+        [user]="loggedUser"
+        size="small"
+      ></app-avatar>
     </div>
-    <p class="nav">Saroja Bamra<mat-icon>keyboard_arrow_down</mat-icon></p>
-    <button class="settings-btn">Profile</button>
-    <button (click)="handleLogout()" class="logout-btn">Logout</button>
+
+    <!-- User Dropdown -->
+    <p-select
+      [options]="userOptions"
+      [placeholder]="loggedUser?.name || 'User'"
+      optionLabel="label"
+      optionValue="value"
+      (onChange)="onUserSelect($event)"
+      styleClass="navbar-select"
+    ></p-select>
   </div>
 </div>

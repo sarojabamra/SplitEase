@@ -15,4 +15,9 @@ export class ChatService {
 
     return this.http.post(url, body, { withCredentials: true });
   }
+
+  fetchChats(): Observable<any[]> {
+    const url = `${this.apiUrl}/chat/fetch`;
+    return this.http.get<any[]>(url, { withCredentials: true });
+  }
 }

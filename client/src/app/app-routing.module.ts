@@ -5,14 +5,16 @@ import { SigninComponent } from './signin/signin.component';
 import { HomeComponent } from './home/home.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'resetPassword/:token', component: ResetPasswordComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: LandingPageComponent },
+  { path: 'dashboard', component: HomeComponent },
 ];
 
 @NgModule({

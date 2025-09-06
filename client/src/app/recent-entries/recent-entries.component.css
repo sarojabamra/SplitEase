@@ -1,33 +1,131 @@
 .recent-entries {
-  color: #bebfc7;
-  padding: 15px 20px;
-  background-color: hsl(0, 0%, 15%, 0.75);
-  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
 }
 
-.entries p {
-  font-size: 14px;
-  margin-top: 5px;
-  color: #888888;
-}
-
-.entries div {
-  display: flex;
-  align-items: center;
+.recent-entries h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c2c3e;
+  margin: 0 0 20px 0;
 }
 
 .entries {
-  margin-top: 5px;
+  margin-bottom: 20px;
 }
 
-.you-owe {
-  color: #bebfc7;
+.entry {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 0 -8px;
+  padding: 12px 8px;
 }
 
-.you-are-owed {
-  color: #afe804;
+.entry:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
 }
 
-.icon {
-  transform: translateY(2.5px);
+.entry:last-child {
+  border-bottom: none;
+}
+
+.entry app-avatar {
+  margin-right: 15px;
+}
+
+.entry-details {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.entry-text {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #2c2c3e;
+  margin-bottom: 4px;
+}
+
+.entry-time {
+  font-size: 12px;
+  color: #888888;
+  font-weight: 400;
+}
+
+.amount {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.amount.positive {
+  background-color: #e6fff9;
+  color: #00a88e;
+}
+
+.amount.negative {
+  background-color: #ffe6e6;
+  color: #ff4d4d;
+}
+
+.view-all {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #2c2c3e;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.view-all:hover {
+  color: #00a88e;
+}
+
+.arrow {
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  color: #888888;
+  padding: 40px 0;
+  font-size: 14px;
+}
+
+.loading p {
+  margin: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* No Entries State */
+.no-entries {
+  text-align: center;
+  color: #888888;
+  font-style: italic;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.no-entries p {
+  margin: 0;
 }

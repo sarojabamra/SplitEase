@@ -1,16 +1,52 @@
 <div class="recent-entries">
   <h3>Recent Entries</h3>
   <div class="entries">
-    <div *ngFor="let entry of recentEntries">
-      <mat-icon class="icon">arrow_right</mat-icon>
-      <p *ngIf="entry.type === 'youOwe'">
-        You owe <span class="you-owe"> ₹{{ entry.amount }} </span> to
-        {{ entry.user }}
-      </p>
-      <p *ngIf="entry.type === 'owedToYou'">
-        {{ entry.user }} owes you
-        <span class="you-are-owed"> ₹{{ entry.amount }} </span>
-      </p>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading...</p>
     </div>
+
+    <!-- Entries List -->
+    <ng-container
+      *ngIf="!isLoading && recentEntries && recentEntries.length > 0"
+    >
+      <div *ngFor="let entry of recentEntries" class="entry">
+        <app-avatar
+          *ngIf="entry?.user"
+          [user]="{ name: entry.user }"
+          size="medium"
+        ></app-avatar>
+        <div class="entry-details">
+          <div class="entry-text">
+            <span *ngIf="entry.type === 'youOwe'"
+              >You owe {{ entry.user }}</span
+            >
+            <span *ngIf="entry.type === 'owedToYou'"
+              >{{ entry.user }} owes you</span
+            >
+          </div>
+          <div class="entry-time">{{ formatTimestamp(entry.timestamp) }}</div>
+        </div>
+        <div
+          class="amount"
+          [ngClass]="entry.type === 'youOwe' ? 'negative' : 'positive'"
+        >
+          <span *ngIf="entry.type === 'youOwe'">-₹{{ entry.amount }}</span>
+          <span *ngIf="entry.type === 'owedToYou'">+₹{{ entry.amount }}</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- No Entries Message -->
+    <div
+      *ngIf="!isLoading && (!recentEntries || recentEntries.length === 0)"
+      class="no-entries"
+    >
+      <p>No recent entries.</p>
+    </div>
+  </div>
+  <div class="view-all">
+    <span>View all</span>
+    <span class="arrow">→</span>
   </div>
 </div>

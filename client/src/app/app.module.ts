@@ -27,6 +27,14 @@ import { UserModalComponent } from './user-modal/user-modal.component';
 import { ChatModalComponent } from './chat-modal/chat-modal.component';
 import { ExpenseModalComponent } from './expense-modal/expense-modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AvatarComponent } from './shared/avatar/avatar.component';
+import { providePrimeNG } from 'primeng/config';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ChartModule } from 'primeng/chart';
+import { SelectModule } from 'primeng/select';
+import Aura from '@primeuix/themes/aura';
 
 @NgModule({
   declarations: [
@@ -44,6 +52,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     UserModalComponent,
     ChatModalComponent,
     ExpenseModalComponent,
+    LandingPageComponent,
+    AvatarComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,11 +65,24 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    ButtonModule,
+    ProgressSpinnerModule,
+    ChartModule,
+    SelectModule,
   ],
   providers: [
     UserService,
     provideClientHydration(),
-    provideAnimationsAsync('noop'),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'false',
+        },
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })

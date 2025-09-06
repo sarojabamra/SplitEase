@@ -86,6 +86,7 @@ export const fetchUsersWhoOweYou = asyncHandler(async (request, response) => {
   const { id } = request.params;
 
   try {
+    // First get the user's balance data
     const user = await User.findById(id)
       .populate({
         path: "balance.totalOwedToYou.user",
@@ -100,22 +101,32 @@ export const fetchUsersWhoOweYou = asyncHandler(async (request, response) => {
     let totalOwedToYou = 0;
     const usersOwingYouMap = new Map();
 
-    user.balance.totalOwedToYou.forEach((entry) => {
+    // Get transaction timestamps for each user
+    for (let entry of user.balance.totalOwedToYou) {
       totalOwedToYou += entry.amount;
 
       const userId = entry.user._id.toString();
       if (!usersOwingYouMap.has(userId)) {
+        // Find the most recent transaction for this user
+        const latestTransaction = await Transaction.findOne({
+          from: userId,
+          to: id,
+        }).sort({ createdAt: -1 });
+
         usersOwingYouMap.set(userId, {
           user: {
             _id: entry.user._id,
             name: entry.user.name,
           },
           amount: entry.amount,
+          timestamp: latestTransaction
+            ? latestTransaction.createdAt
+            : new Date(),
         });
       } else {
         usersOwingYouMap.get(userId).amount += entry.amount;
       }
-    });
+    }
 
     const usersOwingYou = Array.from(usersOwingYouMap.values());
 
@@ -132,6 +143,7 @@ export const fetchUsersYouOwe = asyncHandler(async (request, response) => {
   const { id } = request.params;
 
   try {
+    // First get the user's balance data
     const user = await User.findById(id)
       .populate({
         path: "balance.totalOwedByYou.user",
@@ -146,22 +158,32 @@ export const fetchUsersYouOwe = asyncHandler(async (request, response) => {
     let totalOwedByYou = 0;
     const usersYouOweMap = new Map();
 
-    user.balance.totalOwedByYou.forEach((entry) => {
+    // Get transaction timestamps for each user
+    for (let entry of user.balance.totalOwedByYou) {
       totalOwedByYou += entry.amount;
 
       const userId = entry.user._id.toString();
       if (!usersYouOweMap.has(userId)) {
+        // Find the most recent transaction for this user
+        const latestTransaction = await Transaction.findOne({
+          from: id,
+          to: userId,
+        }).sort({ createdAt: -1 });
+
         usersYouOweMap.set(userId, {
           user: {
             _id: entry.user._id,
             name: entry.user.name,
           },
           amount: entry.amount,
+          timestamp: latestTransaction
+            ? latestTransaction.createdAt
+            : new Date(),
         });
       } else {
         usersYouOweMap.get(userId).amount += entry.amount;
       }
-    });
+    }
 
     const usersYouOwe = Array.from(usersYouOweMap.values());
 

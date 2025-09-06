@@ -3,25 +3,60 @@
     <div class="header">
       <mat-icon (click)="closeModal()" class="icon">close</mat-icon>
     </div>
-    <div class="btns">
-      <h3 class="active">Information</h3>
-      <h3>Add expense</h3>
-    </div>
     <div class="user">
       <div class="imgdiv">
-        <img src="images/profile-image.jpg" />
+        <app-avatar
+          *ngIf="userData"
+          [user]="userData"
+          size="xlarge"
+        ></app-avatar>
       </div>
       <div class="user-info">
-        <p class="name">{{ userData.name }}</p>
-        <p class="username">Username: {{ userData.username }}</p>
-        <p class="email">Email: {{ userData.email }}</p>
-        <p class="mobileNumber">Phone number: {{ userData.mobileNumber }}</p>
-        <p class="id">User ID: {{ userData._id }}</p>
-        <button class="chat-btn" (click)="accessChat(userData._id)">
+        <div class="name-container">
+          <span class="name">{{ userData?.name }}</span>
+          <span class="username-bracket">({{ userData?.username }})</span>
+        </div>
+        <p class="email">{{ userData?.email }}</p>
+      </div>
+      <div class="actions-section">
+        <div class="button-row">
+          <button class="action-btn add-expense-btn" (click)="addExpense()">
+            Add Expense
+          </button>
+          <button class="action-btn settle-up-btn" (click)="settleUp()">
+            Settle Up
+          </button>
+        </div>
+        <button
+          class="action-btn private-message-btn"
+          (click)="accessChat(userData?._id)"
+        >
           Private Message
         </button>
       </div>
     </div>
-    <div class="expenses"></div>
+
+    <div class="transactions-section">
+      <h3 class="section-title">Transactions with {{ userData?.name }}</h3>
+      <div class="transactions-list">
+        <div *ngIf="transactions.length === 0" class="no-transactions">
+          <p>No transactions found with this user.</p>
+        </div>
+        <div *ngFor="let transaction of transactions" class="transaction-item">
+          <div class="transaction-info">
+            <span class="transaction-type">{{ transaction.type }}</span>
+            <span
+              class="transaction-amount"
+              [ngClass]="transaction.amount > 0 ? 'positive' : 'negative'"
+            >
+              {{ transaction.amount > 0 ? "+" : "" }}₹{{ transaction.amount }}
+            </span>
+          </div>
+          <span class="transaction-date">{{
+            formatDate(transaction.date)
+          }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

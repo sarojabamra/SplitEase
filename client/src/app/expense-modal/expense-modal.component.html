@@ -2,49 +2,93 @@
 <div *ngIf="isOpen" class="modal">
   <div class="modal-header">
     <h2>Split Expense</h2>
-    <button (click)="closeModal()">Close</button>
+    <button (click)="closeModal()">×</button>
   </div>
   <div class="modal-body">
     <form>
       <label>
         Description:
         <div class="input-container">
-          <input [(ngModel)]="modalData.description" name="description" />
+          <input
+            [(ngModel)]="modalData.description"
+            name="description"
+            placeholder="Enter expense description"
+          />
         </div>
       </label>
+
       <label>
         Amount:
         <div class="input-container">
-          <input type="number" [(ngModel)]="modalData.amount" name="amount" />
+          <input
+            type="number"
+            [(ngModel)]="modalData.amount"
+            name="amount"
+            placeholder="Enter amount"
+          />
         </div>
       </label>
+
       <label>
         Paid By:
         <div class="input-container">
-          <input [(ngModel)]="modalData.paidBy" name="paidBy" />
+          <input
+            [(ngModel)]="modalData.paidBy"
+            name="paidBy"
+            placeholder="Enter who paid for this expense"
+          />
         </div>
       </label>
-      <div *ngFor="let split of modalData.splitWith; let i = index">
-        <label>
-          Split With User:
-          <div class="input-container">
-            <input [(ngModel)]="split.user" name="user{{ i }}" />
-          </div>
-        </label>
-        <label>
-          Amount:
-          <div class="input-container">
-            <input
-              type="number"
-              [(ngModel)]="split.amount"
-              name="amount{{ i }}"
-            />
-          </div>
-        </label>
-        <button type="button" (click)="removeSplit(i)">Remove</button>
+
+      <div class="split-section">
+        <h4>Split Details</h4>
+        <div
+          *ngFor="let split of modalData.splitWith; let i = index"
+          class="split-item"
+        >
+          <button
+            type="button"
+            class="remove-split-btn"
+            (click)="removeSplit(i)"
+            title="Remove split"
+          >
+            ×
+          </button>
+
+          <label>
+            Split With User:
+            <div class="input-container">
+              <input
+                [(ngModel)]="split.user"
+                name="user{{ i }}"
+                placeholder="Enter user ID to split with"
+              />
+            </div>
+          </label>
+
+          <label>
+            Amount:
+            <div class="input-container">
+              <input
+                type="number"
+                [(ngModel)]="split.amount"
+                name="amount{{ i }}"
+                placeholder="Enter split amount"
+              />
+            </div>
+          </label>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="add-split-btn" (click)="addSplit()">
+            + Add Another Split
+          </button>
+        </div>
       </div>
-      <button type="button" (click)="addSplit()">Add Split</button>
-      <button type="button" (click)="submit()">Submit</button>
+
+      <button type="button" class="submit-btn" (click)="submit()">
+        Create Expense
+      </button>
     </form>
   </div>
 </div>

@@ -1,0 +1,45 @@
+.avatar {
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.avatar.small {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.avatar.medium {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.avatar.large {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+}
+
+.avatar.xlarge {
+  width: 120px;
+  height: 120px;
+  font-size: 60px;
+}
+
+.initials {
+  line-height: 1;
+}
+
+.user-name {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}

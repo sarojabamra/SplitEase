@@ -1,0 +1,64 @@
+.landing-container {
+  background-color: #f3f4f8;
+  height: 100vh;
+  padding: 50px 100px;
+}
+
+.section-1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 100px;
+  justify-content: space-between;
+}
+
+.hero-img {
+  height: 600px;
+}
+
+.col-1 {
+  color: #282a3a;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.col-1 h3 {
+  font-size: 40px;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.intro {
+  color: 101225;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.get-started {
+  padding: 12px 40px;
+  border-radius: 90px;
+  background-color: #282a3a;
+  border: 1px solid #282a3a;
+  color: #f3f4f8;
+  font-size: 15px;
+}
+
+.learn-more {
+  padding: 12px 40px;
+  border-radius: 90px;
+  background-color: transparent;
+  border: 2px solid #282a3a;
+  color: #282a3a;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
