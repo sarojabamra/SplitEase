@@ -1,10 +1,9 @@
-# SplitEase - Expense Sharing Application
 
 A full-stack web application for managing shared expenses and splitting bills among friends, family, or roommates. Built with modern web technologies, this application provides an intuitive interface for tracking who owes what to whom.
 
-## 🚀 Project Overview
+## Project Overview
 
-Splitwise Clone is a comprehensive expense management solution that allows users to:
+SplitEase is a expense management solution that allows users to:
 
 - Add and track shared expenses
 - Split bills among multiple people
@@ -13,7 +12,7 @@ Splitwise Clone is a comprehensive expense management solution that allows users
 - Manage user profiles and groups
 - Track transaction history
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -40,16 +39,16 @@ Splitwise Clone is a comprehensive expense management solution that allows users
 - **CORS** - Cross-origin resource sharing
 - **Dotenv** - Environment configuration
 
-## ✨ Features
+## Features
 
-### 🔐 Authentication & User Management
+### Authentication & User Management
 
 - User registration and login
 - Password reset functionality
 - Secure session management
 - User profile management
 
-### 💰 Expense Management
+### Expense Management
 
 - Add new expenses with descriptions
 - Split expenses among multiple users
@@ -57,35 +56,29 @@ Splitwise Clone is a comprehensive expense management solution that allows users
 - Calculate individual balances
 - View total amounts owed/owed to you
 
-### 👥 User Interactions
+### User Interactions
 
 - Search and find other users
 - View user profiles
 - Send private messages
 - View transaction history with specific users
 
-### 💬 Real-time Chat
+### Real-time Chat
 
 - Private messaging between users
 - Chat history persistence
 - Real-time message updates
 - User-friendly chat interface
 
-### 📊 Dashboard & Analytics
+### Dashboard & Analytics
 
 - Visual balance overview
 - Chart.js integration for expense trends
 - Recent transaction history
 - Balance tracking over time
 
-### 🎨 Modern UI/UX
 
-- Responsive design
-- Dark theme with consistent styling
-- Smooth hover animations
-- Professional Material Design components
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 Splitwise/
@@ -109,7 +102,7 @@ Splitwise/
 └── README.md              # This file
 ```
 
-## 🚀 Getting Started
+## Local Setup
 
 ### Prerequisites
 
@@ -206,7 +199,7 @@ The backend provides RESTful APIs for:
 - **Expenses**: `/expense/*`
 - **Transactions**: `/transaction/*`
 
-## 🌟 Key Features in Detail
+## Key Features in Detail
 
 ### Expense Tracking
 
